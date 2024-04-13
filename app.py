@@ -9,27 +9,7 @@ from PIL import Image
 
 
 def main():
-    st.set_page_config(page_title="Welcome to University of Jos", page_icon=":school:")
-
-    # Load and resize the logo-=
-    logo = Image.open("images/unijos_logo.jfif")
-    logo_resized = logo.resize((150, 150))  # Adjust the dimensions as needed
-    st.image(logo_resized, use_column_width=False)  # Set use_column_width to False to maintain the specified dimensions
-
     st.title("Welcome to Electrical Electronics Engineering Resource Net (ELECRESOURCENET)")
-
-    # Custom CSS to style the sidebar
-    st.markdown(
-        """
-        <style>
-        .sidebar .sidebar-content {
-            background-color: skyblue;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
-
     menu_options = {
         "About the App": about_app,
         "Document Resources": student_resources,
@@ -61,6 +41,27 @@ def main():
         menu_options[selected_option]()
 
 def about_app():
+    st.set_page_config(page_title="Welcome to University of Jos", page_icon=":school:")
+
+    # Load and resize the logo-=
+    logo = Image.open("images/unijos_logo.jfif")
+    logo_resized = logo.resize((150, 150))  # Adjust the dimensions as needed
+    st.image(logo_resized, use_column_width=False)  # Set use_column_width to False to maintain the specified dimensions
+
+    st.title("Welcome to Electrical Electronics Engineering Resource Net (ELECRESOURCENET)")
+
+    # Custom CSS to style the sidebar
+    st.markdown(
+        """
+        <style>
+        .sidebar .sidebar-content {
+            background-color: skyblue;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
     st.write("## About the App")
     st.write("ELECRESOURCENET is a Python-based web application designed to serve the Electrical Electronics Engineering (EEE) department at the University of Jos. Its primary goal is to provide a centralized platform for students and faculty members to access educational resources, manage timetables, and stay updated on the latest news and technological advancements in the field.")
     st.write("## Key features of ELECRESOURCENET include:")
