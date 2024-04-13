@@ -1,17 +1,20 @@
-import google.generativeai as genai
+import os
 import streamlit as st
+import pandas as pd
+import requests
 from PIL import Image
 
 
+
 def main():
-    st.set_page_config(page_title="Welcome to University of Jos", page_icon=":rocket:")
+    st.set_page_config(page_title="Welcome to University of Jos", page_icon=":school:")
 
     # Load and resize the logo-=
     logo = Image.open("images/unijos_logo.jfif")
     logo_resized = logo.resize((150, 150))  # Adjust the dimensions as needed
     st.image(logo_resized, use_column_width=False)  # Set use_column_width to False to maintain the specified dimensions
 
-    st.title("Welcome to Electrical Electronics Engineering Department")
+    st.title("Welcome to Electrical Electronics Engineering Resource Net (ELECRESOURCENET)")
 
     # Custom CSS to style the sidebar
     st.markdown(
@@ -26,17 +29,10 @@ def main():
     )
 
     menu_options = {
-        "About Us": about_us,
-        "Programs": programs,
-        "Faculty & Staff": faculty_staff,
-        "Research & Innovation": research_innovation,
+        "About the App": about_app,
         "Student Resources": student_resources,
         "Events & News": events_news,
-        "Contact Us": contact_us,
-        "AI": {
-            "AI PowerPoint": ai_powerpoint,
-            "AI Chat": ai_chat
-        }
+        "Time Table": timetable  # Add Time Table option
     }
 
     selected_option = st.sidebar.radio("Menu", list(menu_options.keys()), index=0, help="Select a menu option", key="menu")
@@ -50,22 +46,17 @@ def main():
         st.markdown("---")
         menu_options[selected_option]()
 
-def about_us():
-    st.write("## About Us")
-    st.write("Welcome to the Department of Electrical and Electronic Engineering at the University of Jos! We are committed to excellence in education, research, and innovation in the field of electrical and electronics engineering. Let us introduce ourselves:")
-    st.write("## Our Vision")
-    st.write("Our vision is to be a leading center of excellence in electrical and electronic engineering education, research, and community service. We strive to produce graduates who are well-equipped to address real-world challenges and contribute to technological advancements.")
-    st.write("## Our Mission")
-    st.write("Our mission is to:")
-    st.write("Educate: We provide high-quality education to our students, equipping them with the knowledge, skills, and ethical values necessary for successful careers in electrical and electronic engineering.")
-    st.write("Research: We engage in cutting-edge research across various domains, including renewable energy, telecommunications, automation, and control systems. Our faculty members actively contribute to scientific advancements and collaborate with industry partners.")
-    st.write("Innovate: We foster innovation and creativity among our students. Whether it’s designing circuits, developing software, or solving complex engineering problems, we encourage out-of-the-box thinking.")
-    st.write("## Why Choose Us?")
-    st.write("Expert Faculty: Our dedicated faculty members bring a wealth of experience and expertise to the classroom. They are passionate about teaching and mentoring students.")
-    st.write("State-of-the-Art Facilities: Our department is equipped with modern laboratories, simulation tools, and resources that allow students to gain practical experience.")
-    st.write("Industry Connections: We maintain strong ties with industry partners, ensuring that our curriculum aligns with real-world requirements. Internships, guest lectures, and industrial visits are integral parts of our programs.")
-    st.write("Research Opportunities: Students have the chance to participate in research projects, collaborate with faculty, and contribute to scientific advancements.")
-
+def about_app():
+    st.write("## About the App")
+    st.write("ELECRESOURCENET is a Python-based web application designed to serve the Electrical Electronics Engineering (EEE) department at the University of Jos. Its primary goal is to provide a centralized platform for students and faculty members to access educational resources, manage timetables, and stay updated on the latest news and technological advancements in the field.")
+    st.write("## Key features of ELECRESOURCENET include:")
+    st.write("### Resource Upload")
+    st.write("Students can easily upload resources such as PDF documents, lecture notes, and supplementary materials related to their coursework. This feature promotes knowledge sharing and collaboration among students and faculty members.")
+    st.write("### Timetable Generation")
+    st.write("The application offers a convenient way to generate timetables for courses and academic activities. Users can input course schedules, lecture timings, and other relevant information to create personalized timetables tailored to their academic needs.")
+    st.write("### Real-time News Updates")
+    st.write("ELECRESOURCENET provides access to real-time news and updates related to the Electrical Electronics Engineering field. Users can stay informed about industry trends, research developments, and technological innovations, enhancing their learning experience and professional growth.")
+    st.write(" Overall, ELECRESOURCENET serves as a comprehensive platform that integrates educational resources, scheduling tools, and news updates to support the academic and professional endeavors of students and faculty members in the EEE department at the University of Jos.")
 def programs():
     st.write("## Programs Offered")
     st.write("We offer a range of programs, including:")
@@ -85,55 +76,139 @@ def research_innovation():
     st.write("## Research & Innovation")
     # Add content for Research & Innovation section
 
+
+
+# Function to handle file upload
+def upload_file():
+    uploaded_file = st.file_uploader("Choose a file", type=['pdf', 'txt'])
+    if uploaded_file is not None:
+        with open(os.path.join("uploads", uploaded_file.name), "wb") as f:
+            f.write(uploaded_file.getbuffer())
+        st.success("File uploaded successfully!")
+
+# Function to handle file download
+def download_file(file_path):
+    with open(file_path, "rb") as f:
+        file_content = f.read()
+    st.download_button(label="Download File", data=file_content, file_name=os.path.basename(file_path))
+
 def student_resources():
     st.write("## Student Resources")
-    # Add content for Student Resources section
+    st.write("### Upload Resources")
+    upload_file()
+
+    st.write("### Download Resources")
+    resource_files = os.listdir("uploads")
+    selected_file = st.selectbox("Select a file to download", resource_files, index=0)
+    if selected_file:
+        file_path = os.path.join("uploads", selected_file)
+        download_file(file_path)
+
+# Create uploads directory if it doesn't exist
+if not os.path.exists("uploads"):
+    os.makedirs("uploads")
+
+
 
 def events_news():
     st.write("## Events & News")
-    # Add content for Events & News section
+    display_tech_news()
+def fetch_tech_news():
+    # Provide your News API key
+    NEWS_API_KEY = '0eb5fd64355e4a78868ca7a097398d56'
 
-def contact_us():
-    st.write("## Contact Us")
-    # Add content for Contact Us section
+    # Set parameters for fetching tech news
+    params = {
+        'apiKey': NEWS_API_KEY,
+        'category': 'Science',
+        'language': 'en',
+        'pageSize': 10  # Number of articles to fetch
+    }
 
-def ai_powerpoint():
-    st.write("## AI PowerPoint")
-    # Add content for AI PowerPoint section
+    # Make request to News API
+    response = requests.get('https://newsapi.org/v2/top-headlines', params=params)
 
-def ai_chat():
-    st.write("## AI Chat")
+    # Parse response and extract articles
+    if response.status_code == 200:
+        articles = response.json().get('articles', [])
+        return articles
+    else:
+        return []
 
-    # Configure the API key
-    API_KEY = 'AIzaSyDjhKotr-RgmQrGIDwIpixrtNWUZiV-0u0'
-    genai.configure(api_key=API_KEY)
+# Function to display technology news articles
+def display_tech_news():
+    st.write("## Science & Tech News")
+    articles = fetch_tech_news()
+    if articles:
+        for article in articles:
+            st.write(f"**{article['title']}**")
+            # Check if 'urlToImage' exists and is not None
+            if 'urlToImage' in article and article['urlToImage']:
+                st.image(article['urlToImage'], caption='Image associated with the article', use_column_width=True)
+            else:
+                st.write("No image available.")
+            st.write(f"Source: {article['source']['name']}")
+            st.write(f"Published at: {article['publishedAt']}")
+            st.write(article['description'])
+            st.write(f"[Read more]({article['url']})")  # Create clickable "Read more" link
+            st.write("---")
+    else:
+        st.error("Failed to fetch news. Please try again later.")
 
-    # Initialize the Generative AI model
-    model = genai.GenerativeModel('gemini-pro')
-    chat = model.start_chat(history=[])
-    instruction = "In this chat, respond in Electrical and Electronics Engineering terms."
+# Example usage in Streamlit app
 
-    # Initialize force_send if it doesn't exist
-    if "force_send" not in st.session_state:
-        st.session_state.force_send = False
 
-    # Initialize counter for generating unique keys
-    if "input_question_counter" not in st.session_state:
-        st.session_state.input_question_counter = 0
 
-    # Chat loop
-    while True:
-        # Generate a unique key for text input
-        question_key = f"input_question_{st.session_state.input_question_counter}"
-        question = st.text_input("You:", key=question_key)
 
-        if st.button("Send") or st.session_state.force_send:
-            st.session_state.force_send = False
-            if question.strip() == '':
-                break
 
-            response = chat.send_message(instruction + question)
-            st.write(f"Bot: {response.text}")
+def create_timetable():
+    weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    hours = [f"{hour}:00" for hour in range(8, 18)]
+    timetable = pd.DataFrame(index=weekdays, columns=hours)
+
+    for day in weekdays:
+        for hour in hours:
+            subject = st.text_input(f"Enter subject for {day}, {hour}:")
+            timetable.loc[day, hour] = subject
+    return timetable
+
+
+def save_timetable(timetable):
+    timetable.to_csv("timetable.csv")
+    st.success("Timetable saved successfully!")
+
+
+def timetable():
+    st.title("Timetable Creator")
+    st.write(
+        "Please enter subjects for each hour from 8:00 AM to 6:00 PM (1-hour interval) for each weekday (Monday to Saturday).")
+    timetable = create_timetable()
+    st.write("## Timetable")
+
+    # Apply CSS to make cells responsive
+    st.markdown(
+        """
+        <style>
+        .dataframe tbody tr th {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-all;
+        }
+        .dataframe thead th {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-all;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.dataframe(timetable)
+
+    if st.button("Save Timetable"):
+        save_timetable(timetable)
+
 
 if __name__ == "__main__":
     main()
