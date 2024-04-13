@@ -9,7 +9,7 @@ from PIL import Image
 
 
 def main():
-    st.set_page_config(page_title="Welcome to University of Jos", page_icon=":school:")
+    st.set_page_config(page_title="ELECRESOURCENET", page_icon=":school:")
 
     st.title("Electrical Electronics Engineering Resource Net (ELECRESOURCENET)")
     menu_options = {
