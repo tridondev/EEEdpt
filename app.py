@@ -9,7 +9,9 @@ from PIL import Image
 
 
 def main():
-    st.title("Welcome to Electrical Electronics Engineering Resource Net (ELECRESOURCENET)")
+    st.set_page_config(page_title="Welcome to University of Jos", page_icon=":school:")
+
+    st.title("Electrical Electronics Engineering Resource Net (ELECRESOURCENET)")
     menu_options = {
         "About the App": about_app,
         "Document Resources": student_resources,
@@ -41,14 +43,10 @@ def main():
         menu_options[selected_option]()
 
 def about_app():
-    st.set_page_config(page_title="Welcome to University of Jos", page_icon=":school:")
-
     # Load and resize the logo-=
     logo = Image.open("images/unijos_logo.jfif")
     logo_resized = logo.resize((150, 150))  # Adjust the dimensions as needed
     st.image(logo_resized, use_column_width=False)  # Set use_column_width to False to maintain the specified dimensions
-
-    st.title("Welcome to Electrical Electronics Engineering Resource Net (ELECRESOURCENET)")
 
     # Custom CSS to style the sidebar
     st.markdown(
