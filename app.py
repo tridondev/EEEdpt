@@ -31,20 +31,30 @@ def main():
     menu_options = {
         "About the App": about_app,
         "Student Resources": student_resources,
-        "Time Table": timetable,  # Add Time Table option
+        "Time Table": timetable,
         "Events & News": events_news
-
     }
 
-    selected_option = st.sidebar.radio("Menu", list(menu_options.keys()), index=0, help="Select a menu option", key="menu")
+    selected_option = st.sidebar.radio("Menu", list(menu_options.keys()), index=0, help="Select a menu option",
+                                       key="menu")
 
-    if selected_option == "AI":
-        selected_sub_option = st.sidebar.radio("Sub-menu", list(menu_options["AI"].keys()), index=0, help="Select a sub-menu option", key="ai_submenu")
-        if selected_sub_option:
-            st.markdown("---")
-            menu_options["AI"][selected_sub_option]()
-    elif selected_option:
-        st.markdown("---")
+    if selected_option:
+        st.sidebar.markdown(
+            """<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const main = document.querySelector('.sidebar .block-container');
+                const items = main.querySelectorAll('.block');
+
+                items.forEach(item => {
+                    item.addEventListener('click', function() {
+                        main.style.display = 'none';
+                    });
+                });
+            });
+            </script>""",
+            unsafe_allow_html=True
+        )
+        st.sidebar.markdown("---")
         menu_options[selected_option]()
 
 def about_app():
