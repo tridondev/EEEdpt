@@ -35,8 +35,7 @@ Contributions are welcome! Please feel free to submit issues or pull requests to
 This project is licensed under the [MIT License](LICENSE).
 
 ## Acknowledgements
-- Special thanks to the contributors and developers who have contributed to the project.
-- Inspired by the need for a comprehensive educational resource management system for the EEE department at the University of Jos.
+- Inspired and done as part of the curriculum course EEE562 (WEB-BASED Design and Application) this python app help to solve the  need for a comprehensive educational resource management system for the EEE department at the University of Jos.
 
 ---
 
