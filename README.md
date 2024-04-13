@@ -1,40 +1,43 @@
-# Text_to_PPT
+# ELECRESOURCENET
 
-![image](https://img.shields.io/badge/-LangChain-32CD32?logo=LangChain&logoColor=white&style=for-the-badge)
-![image](https://img.shields.io/badge/Streamlit-FF4B4B.svg?style=for-the-badge&logo=Streamlit&logoColor=white)
-![image](https://img.shields.io/badge/OpenAI-412991.svg?style=for-the-badge&logo=OpenAI&logoColor=white)
+ELECRESOURCENET is a sophisticated Python-based web application tailored for the Electrical Electronics Engineering (EEE) department at the University of Jos. It serves as a centralized platform to facilitate efficient management of educational resources, streamline timetable generation, and provide real-time updates on news and technological advancements in the field.
 
-This app uses artificial intelligence (AI) to generate PowerPoint presentations from a given topic. It is built using Streamlit, a Python framework for building web apps, and uses the following AI models:
+## Key Features
 
-GPT-3.5-turbo-instruct to generate slide titles
+### 1. Resource Upload
+Students can seamlessly upload educational resources such as PDF documents, lecture notes, and supplementary materials. This feature fosters collaboration and knowledge sharing among students and faculty members, enriching the learning experience.
 
-text-davinci-003 to generate slide content
+### 2. Timetable Generation
+ELECRESOURCENET offers a user-friendly interface for generating personalized timetables. Users can input course schedules, lecture timings, and other relevant information to create customized timetables tailored to their academic requirements.
 
-To use the app, simply enter your topic and click the "Generate Presentation" button. The app will then generate a short PowerPoint presentation with 3 slides. The slides will be titled and formatted in a professional manner, and the content will be informative and engaging.
+### 3. Real-time News Updates
+Stay informed with real-time news and updates on industry trends, research developments, and technological innovations in the Electrical Electronics Engineering field. ELECRESOURCENET ensures users are up-to-date with the latest information, enhancing their learning and professional growth.
 
-This app is a great tool for anyone who needs to create presentations quickly and easily. It is also a great way to learn about AI and how it can be used to automate tasks.
+## How to Use
+1. Clone the repository to your local machine.
+2. Install the necessary dependencies using `pip install -r requirements.txt`.
+3. Run the application using `streamlit run app.py`.
+4. Access the application through the provided URL.
 
-![Alt text](<Screenshot 2023-10-03 104745.png>)
+## Technologies Used
+- Python
+- Streamlit
+- Pandas
+- FPDF (for PDF generation)
 
-Example PPT: [Large Language Models_presentation.pptx](https://github.com/AminHaghdadi/Text_to_PPT/files/12803059/Large.Language.Models_presentation.pptx)
+## Screenshots
+(Include screenshots of the application interface here)
 
-## Deployment
+## Contributing
+Contributions are welcome! Please feel free to submit issues or pull requests to help improve ELECRESOURCENET.
 
-To deploy this project run
+## License
+This project is licensed under the [MIT License](LICENSE).
 
-1:
-```bash
-  git clone https://github.com/AminHaghdadi/Text_to_PPT.git
-```
-2: install requirements:
-```bash
-  pip install -r requirement.txt 
-```
-3:
+## Acknowledgements
+- Special thanks to the contributors and developers who have contributed to the project.
+- Inspired by the need for a comprehensive educational resource management system for the EEE department at the University of Jos.
 
-Enter your OpenAI API in app.py 
+---
 
-4: Run in Terminal
-```bash
-streamlit run app.py
-```
+**Disclaimer:** This project is a demonstration and educational tool. It is not officially affiliated with the University of Jos or its Electrical Electronics Engineering department.
