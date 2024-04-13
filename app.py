@@ -31,8 +31,9 @@ def main():
     menu_options = {
         "About the App": about_app,
         "Student Resources": student_resources,
-        "Events & News": events_news,
-        "Time Table": timetable  # Add Time Table option
+        "Time Table": timetable,  # Add Time Table option
+        "Events & News": events_news
+
     }
 
     selected_option = st.sidebar.radio("Menu", list(menu_options.keys()), index=0, help="Select a menu option", key="menu")
@@ -57,40 +58,25 @@ def about_app():
     st.write("### Real-time News Updates")
     st.write("ELECRESOURCENET provides access to real-time news and updates related to the Electrical Electronics Engineering field. Users can stay informed about industry trends, research developments, and technological innovations, enhancing their learning experience and professional growth.")
     st.write(" Overall, ELECRESOURCENET serves as a comprehensive platform that integrates educational resources, scheduling tools, and news updates to support the academic and professional endeavors of students and faculty members in the EEE department at the University of Jos.")
-def programs():
-    st.write("## Programs Offered")
-    st.write("We offer a range of programs, including:")
-    st.write("### Bachelor of Engineering (B.Eng.) in Electrical and Electronic Engineering:")
-    st.write(" A comprehensive undergraduate program that covers fundamental principles, advanced topics, and practical applications.")
-    st.write("### Master of Science (M.Sc.) in Electrical and Electronic Engineering:")
-    st.write(" For those seeking specialized knowledge and research opportunities.")
-    st.write("### Doctor of Philosophy (Ph.D.) in Electrical and Electronic Engineering:")
-    st.write(" Our doctoral program encourages original research and scholarly contributions.")
-    # Add content for Programs section
-
-def faculty_staff():
-    st.write("## Faculty & Staff")
-    # Add content for Faculty & Staff section
-
-def research_innovation():
-    st.write("## Research & Innovation")
-    # Add content for Research & Innovation section
 
 
 
 # Function to handle file upload
 def upload_file():
-    uploaded_file = st.file_uploader("Choose a file", type=['pdf', 'txt'])
+    uploaded_file = st.file_uploader("Choose a file", type=['pdf', 'txt', 'docx', 'pptx', 'xlsx', 'jpg', 'jpeg',
+                                                            'png'])  # Add image formats
     if uploaded_file is not None:
         with open(os.path.join("uploads", uploaded_file.name), "wb") as f:
             f.write(uploaded_file.getbuffer())
         st.success("File uploaded successfully!")
+
 
 # Function to handle file download
 def download_file(file_path):
     with open(file_path, "rb") as f:
         file_content = f.read()
     st.download_button(label="Download File", data=file_content, file_name=os.path.basename(file_path))
+
 
 def student_resources():
     st.write("## Student Resources")
@@ -99,15 +85,25 @@ def student_resources():
 
     st.write("### Download Resources")
     resource_files = os.listdir("uploads")
-    selected_file = st.selectbox("Select a file to download", resource_files, index=0)
-    if selected_file:
-        file_path = os.path.join("uploads", selected_file)
-        download_file(file_path)
+
+    # Search bar
+    search_query = st.text_input("Search uploaded files:", "")
+
+    # Filter files based on search query
+    filtered_files = [file for file in resource_files if search_query.lower() in file.lower()]
+
+    if filtered_files:
+        selected_file = st.selectbox("Select a file to download", filtered_files, index=0)
+        if selected_file:
+            file_path = os.path.join("uploads", selected_file)
+            download_file(file_path)
+    else:
+        st.write("No files found matching the search criteria.")
+
 
 # Create uploads directory if it doesn't exist
 if not os.path.exists("uploads"):
     os.makedirs("uploads")
-
 
 
 def events_news():
