@@ -248,10 +248,10 @@ def plot_graph(x, y, xlabel, ylabel):
 
 
 def graph_plotter():
-    st.title("Graph Plotter with Slope Calculation")
+    st.title("Graph Plotter with Slope Calculation and Intercept")
 
     # Input data
-    st.write("Enter the values to plot the graph:")
+    st.write("Enter the values to plot the graph: Kindly ensure the number of values you are entering for the x and y are the same number count")
     x_values = st.text_input("Enter x values (comma-separated)", help="Example: 1, 2, 3")
     y_values = st.text_input("Enter y values (comma-separated)", help="Example: 4, 5, 6")
 
