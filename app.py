@@ -61,7 +61,7 @@ def about_app():
     )
 
     st.write("## About the App")
-    st.write("ELECRESOURCENET is a Python-based web application designed to serve the Electrical Electronics Engineering (EEE) department at the University of Jos. Its primary goal is to provide a centralized platform for students and faculty members to access educational resources, manage timetables, and stay updated on the latest news and technological advancements in the field.")
+    st.write("ELECRESOURCENET is a Python-based web application designed to serve the Electrical Electronics Engineering (EEE) department at the University of Jos. Its primary goal is to provide a centralized platform for students and faculty members to access educational resources, manage timetables, plot straight  line graphs between quantities and stay updated on the latest news and technological advancements in the field.")
     st.write("## Key features of ELECRESOURCENET include:")
     st.write("### Resource Upload")
     st.write("Students can easily upload resources such as PDF documents, lecture notes, and supplementary materials related to their coursework. This feature promotes knowledge sharing and collaboration among students and faculty members.")
