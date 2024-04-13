@@ -1,3 +1,0 @@
-python-pptx
-streamlit
-openai
