@@ -173,7 +173,7 @@ def display_tech_news():
 
 def create_timetable():
     weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    hours = [f"{hour}:00" for hour in range(8, 18)]
+    hours = [f"{hour}:00" for hour in range(8, 19)]
     timetable = pd.DataFrame(index=weekdays, columns=hours)
 
     for day in weekdays:
