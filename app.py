@@ -11,7 +11,7 @@ from PIL import Image
 def main():
     st.set_page_config(page_title="ELECRESOURCENET", page_icon=":school:")
 
-    st.title("Electrical Electronics Engineering Resource Net (ELECRESOURCENET)")
+    st.title("Electrical and Electronics Engineering Resource Net (ELECRESOURCENET)")
     menu_options = {
         "About the App": about_app,
         "Document Resources": student_resources,
